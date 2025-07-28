@@ -12,7 +12,8 @@ const RecruiterSchema = new Schema({
     skills: { type: [String], default: [] },
     locationPref: { type: String, default: '' },
   },
-  createdAt: { type: Date, default: Date.now }
+  createdAt: { type: Date, default: Date.now },
+  lastSignedIn: { type: Date, default: null },
 });
 
 export default model('Recruiter', RecruiterSchema);
