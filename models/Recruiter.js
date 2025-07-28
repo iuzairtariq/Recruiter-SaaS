@@ -1,8 +1,7 @@
 // models/Recruiter.js
 import mongoose from 'mongoose';
-const { Schema, model } = mongoose;
 
-const RecruiterSchema = new Schema({
+const RecruiterSchema = new mongoose.Schema({
   clerkRecruiterId: { type: String, required: true, unique: true, index: true },
   email: { type: String },
   fullName: { type: String },
@@ -16,4 +15,10 @@ const RecruiterSchema = new Schema({
   lastSignedIn: { type: Date, default: null },
 });
 
-export default model('Recruiter', RecruiterSchema);
+// Agar model already exist kare, to overwrite na karo
+const Recruiter = mongoose.models.Recruiter
+  ? mongoose.model('Recruiter')
+  : mongoose.model('Recruiter', RecruiterSchema);
+
+export default Recruiter;
+
