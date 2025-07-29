@@ -23,8 +23,8 @@ export default function Home() {
         </div>
       ) : (
         <div className="text-center py-20">
-          <h2 className="text-2xl font-semibold mb-2">Welcome to Uzair's world</h2>
-          <p>Sign in to explore my app</p>
+          <h2 className="text-2xl font-semibold mb-2">Welcome to the Uzair's world</h2>
+          <p>Register yourself to explore my app.</p>
         </div>
       )}
     </div>

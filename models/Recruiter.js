@@ -11,8 +11,13 @@ const RecruiterSchema = new mongoose.Schema({
     skills: { type: [String], default: [] },
     locationPref: { type: String, default: '' },
   },
-  createdAt: { type: Date, default: Date.now },
-  lastSignedIn: { type: Date, default: null },
+  // Now synced from Clerk, remove defaults so MongoDB won't auto-populate
+  createdAt: { type: Date, required: true },
+  lastSignedIn: { type: Date },
+}, {
+  // timestamps: false: Mongoose ki taraf se jo automatic createdAt/updatedAt fields lagti hain,
+  // unko disable karta hai taake sirf aapke custom Clerk‑sync dates hi use hon.
+  timestamps: false,
 });
 
 // Agar model already exist kare, to overwrite na karo

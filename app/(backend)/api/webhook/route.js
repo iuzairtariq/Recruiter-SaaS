@@ -22,7 +22,8 @@ export async function POST(req) {
                     clerkRecruiterId,
                     email,
                     fullName,
-                    lastSignedIn: new Date(last_sign_in_at),
+                    createdAt: new Date(evt.data.created_at),
+                    lastSignedIn: evt.data.last_sign_in_at ? new Date(evt.data.last_sign_in_at) : undefined,
                 });
                 console.log(`Recruiter ${clerkRecruiterId} created`);
                 break;
@@ -34,8 +35,10 @@ export async function POST(req) {
                     {
                         email,
                         fullName,
-                        lastSignedIn: last_sign_in_at ? new Date(last_sign_in_at) : undefined,
+                        lastSignedIn: evt.data.last_sign_in_at ? new Date(evt.data.last_sign_in_at) : undefined,
                     },
+                    // new: true: Is se findOneAndUpdate purana doc nahin, balki update ke baad wala naya document return karta hai.
+                    // upsert: true: Agar matching document na mile, to naya document create kar deta hai.
                     { new: true, upsert: true }
                 );
                 console.log(`Recruiter ${clerkRecruiterId} updated`);
