@@ -28,6 +28,17 @@ export async function POST(req) {
                 console.log(`Recruiter ${clerkRecruiterId} created`);
                 break;
 
+            case 'session.created':
+                await Recruiter.findOneAndUpdate(
+                    { clerkRecruiterId: evt.data.user_id },
+                    {
+                        lastSignedIn: new Date(evt.data.created_at)
+                    },
+                    { new: true, upsert: true }
+                );
+                console.log(`Recruiter ${evt.data.user_id} lastSignedIn sync`);
+                break;
+
             case 'user.updated':
                 // partial update
                 await Recruiter.findOneAndUpdate(

@@ -26,4 +26,3 @@ const Recruiter = mongoose.models.Recruiter
   : mongoose.model('Recruiter', RecruiterSchema);
 
 export default Recruiter;
-
