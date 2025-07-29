@@ -23,18 +23,18 @@ export async function POST(req) {
                     email,
                     fullName,
                     createdAt: new Date(evt.data.created_at),
-                    lastSignedIn: evt.data.last_sign_in_at ? new Date(evt.data.last_sign_in_at) : undefined,
                 });
                 console.log(`Recruiter ${clerkRecruiterId} created`);
                 break;
 
             case 'session.created':
-                await Recruiter.findOneAndUpdate(
+                await Recruiter.updateOne(
                     { clerkRecruiterId: evt.data.user_id },
                     {
-                        lastSignedIn: new Date(evt.data.last_active_at)
-                    },
-                    { new: true, upsert: true }
+                        $set: {
+                            lastSignedIn: new Date(evt.data.last_active_at)
+                        }
+                    }
                 );
                 console.log(`Recruiter ${evt.data.user_id} lastSignedIn sync`);
                 break;
