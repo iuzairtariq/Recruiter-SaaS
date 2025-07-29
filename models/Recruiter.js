@@ -17,11 +17,6 @@ const RecruiterSchema = new mongoose.Schema({
   timestamps: false,
 });
 
-// Add default sorting: newest updated/login first, oldest last
-RecruiterSchema.pre(/^find/, function() {
-  this.sort({ lastSignedIn: -1, createdAt: -1 });
-});
-
 // If model already exists, reuse it
 const Recruiter = mongoose.models.Recruiter || mongoose.model('Recruiter', RecruiterSchema);
 
