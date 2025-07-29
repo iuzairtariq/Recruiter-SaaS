@@ -32,7 +32,7 @@ export async function POST(req) {
                 await Recruiter.findOneAndUpdate(
                     { clerkRecruiterId: evt.data.user_id },
                     {
-                        lastSignedIn: new Date(evt.data.created_at)
+                        lastSignedIn: new Date(evt.data.last_active_at)
                     },
                     { new: true, upsert: true }
                 );
